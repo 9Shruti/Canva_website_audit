@@ -1,121 +1,69 @@
-# 🌐 Canva Website Audit Project
+# 🌐 Website Audit System
 
-> 📊 A complete **Website Performance, SEO & Accessibility Audit** for `https://www.canva.in/` — delivered as a spreadsheet report 📑 and a relational MySQL database 🗄️.
+> 📊 A complete **Website Performance, SEO & Accessibility Audit System** for `https://www.canva.in/` — delivered as a spreadsheet report 📑 and a relational MySQL database 🗄️.
 
 ---
 
-## 📦 What's Inside
+## 📌 Project Status
 
-| 📁 File | 📝 What It Is |
+### ✅ Completed
+- 🗄️ Database schema design (`website_audit_master`, `categories`, `sub_factors`, `factors`)
+- 📊 Full 3-level audit scoring (Category → Sub-Factor → Factor)
+- 📈 Excel report with 3 sheets (`INSIGHT`, `Sheet2`, `Sheet3`)
+- 🛠️ SQL query optimization guide with before/after examples
+- 📖 Project documentation (this README)
+
+### 🚧 Currently Working On
+- 🔄 Automating data sync between the spreadsheet and the MySQL database
+- 📉 Adding historical audit tracking (multiple audits per website over time)
+- 🎨 Improving Excel formatting/conditional colors for scores
+
+### 🔮 Upcoming Features
+- 📡 Live PageSpeed API integration for auto-refreshing scores
+- 📊 Interactive dashboard (charts & graphs) built from the database
+- 🔔 Score-drop alerts/notifications
+- 🌍 Support for auditing multiple websites in one system
+
+---
+
+## 🎯 Project Objectives
+
+- 🚀 Measure website health across **Performance, Accessibility, Best Practices & SEO**
+- 🔽 Break every score down into a clear **3-level hierarchy** so issues are easy to trace
+- 🗄️ Store audit results in a **structured, queryable database** instead of a flat report
+- 🛠️ Provide **actionable SQL-level fixes** for real backend performance issues
+- 📖 Make the whole audit understandable to both developers and non-technical stakeholders
+
+---
+
+## 🧰 Technologies Used
+
+| Tool | Purpose |
 |---|---|
-| `canva_spreadsheet__2_.xlsx` | 📈 The full audit report — scores, breakdowns & fix suggestions |
-| `canva_db.sql` | 🗄️ A MySQL database that stores the same audit data in proper tables |
+| 🐬 MySQL | Relational database to store audit data |
+| 📊 Microsoft Excel (.xlsx) | Human-readable audit report |
+| 🐍 Python (openpyxl) | Reading/processing the spreadsheet |
+| 🧮 SQL | Querying & optimizing audit + application data |
+| 📝 Markdown | Documentation |
 
 ---
 
-## 🎯 What This Project Does
-
-This project analyzes a website across **4 key areas** and gives it a health score out of 100 💯:
-
-| Category | Emoji | What It Checks |
-|---|---|---|
-| ⚡ Performance | 🚀 | How fast the site loads |
-| ♿ Accessibility | 🧑‍🦯 | How usable it is for everyone |
-| ✅ Best Practices | 🔒 | Security & coding standards |
-| 🔍 SEO | 📈 | How well it ranks on search engines |
-
-Then it goes **3 levels deep** 🔽 to explain *exactly* why the score is what it is — down to individual technical metrics.
-
----
-
-## 🏆 Overall Result
+## 🗂️ Repository Structure
 
 ```
-🌍 Website:        https://www.canva.in/
-⭐ Overall Score:  87 / 100
-🟢 Status:         Good
-```
-
-| ID | Category | ⚖️ Weight | 🎯 Score | 🚦 Status |
-|---|---|---|---|---|
-| C1 | ⚡ Performance | 25% | 60.1 | 🟠 Needs Improvement |
-| C2 | ♿ Accessibility | 25% | 96.0 | 🟢 Excellent |
-| C3 | ✅ Best Practices | 25% | 90.5 | 🟢 Good |
-| C4 | 🔍 SEO | 25% | 100.0 | 🟢 Excellent |
-| **OVR** | **🏁 Overall** | **100%** | **87.0** | **🟢 Good** |
-
----
-
-## 🔽 The 3-Level Drill-Down System
-
-Think of it like zooming into a map 🗺️ — each level gets more detailed.
-
-```
-🥇 LEVEL 1 — Category Score        (e.g. "Performance = 60.1")
-   └─ 🥈 LEVEL 2 — Sub-Factor Score   (e.g. "LCP = 54.3")
-        └─ 🥉 LEVEL 3 — Raw Factor    (e.g. "Server Response Time = 420ms ⚠️")
-```
-
-### 🥇 Level 1 — Categories
-The 4 big buckets shown in the table above ☝️
-
-### 🥈 Level 2 — Sub-Factors
-Each category breaks into smaller pieces, for example:
-
-| ⚡ Performance Sub-Factors | Score |
-|---|---|
-| 🖼️ Largest Contentful Paint (LCP) | 54.3 |
-| ⏱️ Total Blocking Time (TBT) | 37.7 |
-| 📐 Cumulative Layout Shift (CLS) | 100.0 |
-| 🎨 First Contentful Paint (FCP) | 70.0 |
-| 🏎️ Speed Index | 44.0 |
-
-*(similar breakdowns exist for ♿ Accessibility, ✅ Best Practices, 🔍 SEO)*
-
-### 🥉 Level 3 — Individual Factors
-The most granular metrics, each with a pass/fail flag:
-
-| Factor | Value | Target | Status |
-|---|---|---|---|
-| 🕐 Server Response Time | 420ms | < 200ms | ⚠️ Fix |
-| 📦 Resource Load Time | 780ms | < 500ms | ⚠️ Fix |
-| 🧵 Long Tasks | 8 | 0 | ⚠️ Fix |
-| 🖼️ Images Without Dimensions | 0 | 0 | ✅ OK |
-| 🔐 HTTPS Enabled | Yes | Yes | ✅ OK |
-
----
-
-## 🛠️ The Fix-It Guide (`INSIGHT` Sheet)
-
-This is the **best part** 🌟 — every performance issue comes with a real, ready-to-use SQL fix!
-
-| 🚩 Issue | Priority | Fix Technique | Impact |
-|---|---|---|---|
-| 🔴 Render-blocking Requests | High | Select only needed columns + Index | ⚡ 30–60% faster |
-| 🔴 Forced Reflow | High | JOIN + Batch Fetch | 📉 Fewer DB calls |
-| 🔴 LCP Request Discovery | High | Prioritize hero banner load | 🖼️ Faster LCP |
-| 🟠 Cache Lifetimes | Medium | Redis/Django caching | 🚀 70–90% fewer DB hits |
-| 🟠 Image Delivery | Medium | WebP + CDN + Lazy Load | 🗜️ 30–70% smaller images |
-| ⚪ DOM Size | Low | Pagination | 🧹 Lighter HTML |
-
-Each row includes a real **before ❌ / after ✅** SQL query example, e.g.:
-
-```sql
--- ❌ Before (slow)
-SELECT * FROM products;
-
--- ✅ After (optimized)
-SELECT product_id, product_name, price, image_url 
-FROM products 
-WHERE status='ACTIVE' 
-LIMIT 20;
+📁 website-audit-system/
+│
+├── 📄 Database_Schema.sql        # MySQL schema + seed data
+├── 📊 canva_spreadsheet.xlsx     # Full audit report (3 sheets)
+└── 📖 README.md                  # Project documentation (this file)
 ```
 
 ---
 
-## 🗄️ Database Structure (`canva_db.sql`)
+## 🗄️ Database Details
 
-The audit data is stored in **4 connected tables** 🔗:
+The database `canva_db` stores the audit as **4 connected tables**, forming a
+drill-down hierarchy:
 
 ```
 📋 website_audit_master   (1 audit per website)
@@ -137,34 +85,140 @@ The audit data is stored in **4 connected tables** 🔗:
 | `sub_factors` | `sub_factor_id` | Mid-level metrics (P1, A1, B1, S1...) |
 | `factors` | `factor_id` | Raw values, e.g. `P1F1` = 420ms |
 
-### ▶️ How to Run It
+🔗 **Relationships:** `website_audit_master` → `categories` → `sub_factors` → `factors` (each linked via foreign keys).
+
+---
+
+## ✨ Features
+
+- 🏆 **Overall Website Score** — single 0–100 health score
+- 🔽 **3-Level Drill-Down** — Category → Sub-Factor → Factor, so any score can be traced to its root cause
+- 🚦 **Status Flags** — Excellent / Good / Needs Improvement / ⚠️ Fix on every metric
+- 🛠️ **SQL Fix Guide** — real before/after query optimizations mapped to specific PageSpeed issues
+- 📖 **Data Dictionary** — built-in sheet explaining every field and level
+- 🗄️ **Relational Storage** — same data available in Excel *and* MySQL
+
+---
+
+## 📁 Included Files
+
+### 🗄️ `Database_Schema.sql`
+- Creates the `canva_db` database and 4 core tables:
+  `website_audit_master`, `categories`, `sub_factors`, `factors`
+- Includes foreign key relationships linking each level of the hierarchy
+- Comes pre-loaded with seed data for the `https://www.canva.in/` audit (Score: **87/100 — Good**)
+
+### 📊 `canva_spreadsheet.xlsx`
+| Sheet | Contents |
+|---|---|
+| 🛠️ `INSIGHT` | Prioritized PageSpeed issues + real SQL fixes & expected impact |
+| 📈 `Sheet2` | Full 3-level scored audit (Category → Sub-Factor → Factor) |
+| 📖 `Sheet3` | Data dictionary explaining the scoring structure |
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone / Download the project
 ```bash
-mysql -u your_username -p < canva_db.sql
+git clone https://github.com/your-username/website-audit-system.git
+cd website-audit-system
+```
+
+### 2️⃣ Set up the database
+```bash
+mysql -u your_username -p < Database_Schema.sql
+```
+
+### 3️⃣ Verify the data
+```sql
+USE canva_db;
+SELECT * FROM website_audit_master;
+SELECT * FROM categories;
+```
+
+### 4️⃣ Open the report
+Open `canva_spreadsheet.xlsx` in Excel / Google Sheets to explore the full breakdown visually.
+
+---
+
+## 🧪 Sample SQL Queries
+
+**🏆 Get the overall website score**
+```sql
+SELECT website_url, overall_score, overall_status
+FROM website_audit_master;
+```
+
+**📊 Get all category scores, sorted worst to best**
+```sql
+SELECT category_name, score, status
+FROM categories
+WHERE category_id != 'OVR'
+ORDER BY score ASC;
+```
+
+**🔽 Drill down: all sub-factors for Performance (C1)**
+```sql
+SELECT sub_factor_name, score
+FROM sub_factors
+WHERE category_id = 'C1';
+```
+
+**⚠️ Find every factor that needs fixing**
+```sql
+SELECT factor_name, value, unit, good_range, flag
+FROM factors
+WHERE flag = '⚠ Fix';
+```
+
+**🔗 Full drill-down join (Category → Sub-Factor → Factor)**
+```sql
+SELECT c.category_name, s.sub_factor_name, f.factor_name, f.score, f.flag
+FROM categories c
+JOIN sub_factors s ON c.category_id = s.category_id
+JOIN factors f ON s.sub_factor_id = f.sub_factor_id
+ORDER BY c.category_name, s.sub_factor_name;
 ```
 
 ---
 
-## 🧩 How Everything Connects
+## 🗺️ Development Roadmap
 
-```
-📊 Spreadsheet (for humans to read)   🔄   🗄️ Database (for apps to query)
-        Sheet2 = Levels 1-3          ⬌      categories → sub_factors → factors
-        Sheet3 = Data Dictionary     ⬌      table/column definitions
-        INSIGHT = Fix Guide          ⬌      real-world query optimization examples
-```
-
----
-
-## ✅ Quick Summary
-
-- 🎯 **What:** A full website health audit (Performance, Accessibility, Best Practices, SEO)
-- 📊 **Score:** 87/100 — Good, with Performance needing the most work 🔧
-- 🗄️ **Storage:** 4-table MySQL database mirroring the audit hierarchy
-- 🛠️ **Bonus:** Ready-to-use SQL optimization fixes for every performance issue
+| Phase | Status | Goal |
+|---|---|---|
+| 1️⃣ Schema Design | ✅ Done | Build normalized database structure |
+| 2️⃣ Audit Scoring | ✅ Done | Implement 3-level scoring system |
+| 3️⃣ Reporting | ✅ Done | Build Excel report + fix guide |
+| 4️⃣ Automation | 🚧 In Progress | Sync spreadsheet ⇄ database automatically |
+| 5️⃣ Live Data | 🔮 Planned | Connect to PageSpeed Insights API |
+| 6️⃣ Dashboard | 🔮 Planned | Interactive charts for scores & trends |
+| 7️⃣ Multi-Site Support | 🔮 Planned | Audit and compare multiple websites |
 
 ---
 
-💬 *Got questions? Every metric in this project traces back through Level 1 → 2 → 3, so you can always find exactly where a score came from!* 🔍
+## 🔭 Future Scope
+
+- 📡 Real-time auditing via Google PageSpeed Insights / Lighthouse API
+- 📊 Web dashboard (React + charts) reading directly from `canva_db`
+- 🕰️ Historical trend tracking — compare scores across audit dates
+- 🤖 Auto-generated fix recommendations using AI
+- 🌍 Multi-website & multi-user support
+- 📧 Automated email/Slack reports after each audit
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! 🎉
+
+1. 🍴 Fork this repository
+2. 🌿 Create a new branch (`git checkout -b feature/your-feature`)
+3. 💾 Commit your changes (`git commit -m "Add your feature"`)
+4. 📤 Push to the branch (`git push origin feature/your-feature`)
+5. 🔁 Open a Pull Request
+
+Bug reports, feature ideas, and documentation improvements are all appreciated 🙌
 
 ---
 
